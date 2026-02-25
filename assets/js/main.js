@@ -283,90 +283,7 @@
         .catch((err) => console.error("Error cargando footer:", err));
     }
   });
-  /**
-   * Language Switcher
-   */
-  let currentLanguage = 'es'; // Default language
-  
-  window.changeLanguage = function(lang) {
-    // Activar bandera para prevenir scroll automático
-    isChangingLanguage = true;
-    
-    // Guardar la posición actual del scroll de manera más robusta
-    savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    
-    currentLanguage = lang;
-    
-    // Update all elements with data-translate attribute (except typed elements)
-    const elements = document.querySelectorAll('[data-translate]');
-    elements.forEach(element => {
-      // Skip typed elements to preserve their functionality
-      if (element.classList.contains('typed')) {
-        return;
-      }
-      
-      const key = element.getAttribute('data-translate');
-      if (translations[lang] && translations[lang][key]) {
-        element.textContent = translations[lang][key];
-      }
-    });
-    
-    // Update language button
-    const currentLangSpan = document.querySelector('.current-lang');
-    if (currentLangSpan) {
-      currentLangSpan.textContent = lang.toUpperCase();
-    }
-    
-    // Update active dropdown item
-    const dropdownItems = document.querySelectorAll('.dropdown-item');
-    dropdownItems.forEach(item => {
-      item.classList.remove('active');
-      if (item.getAttribute('data-lang') === lang) {
-        item.classList.add('active');
-      }
-    });
-    
-    // Save language preference
-    localStorage.setItem('preferred-language', lang);
-    
-    // Restaurar la posición del scroll de manera más robusta
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: savedScrollPosition,
-        behavior: 'instant'
-      });
-    });
-    
-    // Backup: restaurar después de un delay más largo
-    setTimeout(() => {
-      window.scrollTo({
-        top: savedScrollPosition,
-        behavior: 'instant'
-      });
-      // Desactivar bandera después de restaurar
-      isChangingLanguage = false;
-    }, 300);
-  }
-  
-  function initLanguage() {
-    // Load saved language preference
-    const savedLang = localStorage.getItem('preferred-language');
-    if (savedLang && translations[savedLang]) {
-      changeLanguage(savedLang);
-    }
-  }
-  
-  // Prevenir scroll automático al cambiar idioma
-  let isChangingLanguage = false;
-  let savedScrollPosition = 0;
-  
-  // Interceptar cualquier scroll automático durante el cambio de idioma
-  window.addEventListener('scroll', function() {
-    if (isChangingLanguage) {
-      window.scrollTo(0, savedScrollPosition);
-      return false;
-    }
-  });
+
   /**
    * Correct scrolling position upon page load for URLs containing hash links.
    */
@@ -383,9 +300,6 @@
         }, 100);
       }
     }
-    
-    // Initialize language switcher
-    initLanguage();
   });
 
   /**
