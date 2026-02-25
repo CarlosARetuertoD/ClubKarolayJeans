@@ -8,13 +8,13 @@
   --background-color: #ffffff; 
   --default-color: #000000;
   --heading-color: #110a06; 
-  --accent-color: #553523; 
+  --accent-color: #9b6d53; 
   --surface-color: #ffffff;
   --contrast-color: #6b4725; 
 }
 :root {
   --nav-color: rgba(255, 255, 255, 0.8);  
-  --nav-hover-color: #15f7d1;
+  --nav-hover-color: #ddb153;
   --nav-mobile-background-color: #ffffff;
   --nav-dropdown-background-color: #ffffff; 
   --nav-dropdown-hover-color: #753e1e; 
